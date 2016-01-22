@@ -13,7 +13,21 @@ Collection of functions for network related calculations.
 __Checking that address is within given range__
 
 ```
-(spider.core/ip-in-range? "192.168.10.20" "192.168.10.0" "192.168.10.255")
+(spider.core/ip-in-range? "192.168.25.30" "192.168.25.0" "192.168.25.255")
+;; true
+```
+
+__Checking that address is within given subnet__
+
+```
+(spider.core/ip-in-subnet? "192.168.25.0" "192.168.25.0" :24)
+;; true
+```
+
+or equivalent call with explicit mask 
+
+```
+(spider.core/ip-in-subnet? "192.168.25.0" "192.168.25.0" "255.255.255.0")
 ;; true
 ```
 
