@@ -39,5 +39,32 @@
 
 (deftest about-ip-in-range
   (testing "In range"
-    (is (true? (sc/ip-in-range? "192.168.25.30" "0.0.0.0" "255.255.255.255")))
-    ))
+    (is (true? (sc/ip-in-range? "192.168.25.30" "192.168.25.0" "192.168.25.255")))
+    (is (false? (sc/ip-in-range? "192.168.25.30" "192.168.25.100" "192.168.25.255")))))
+
+(deftest about-ip-in-subnet
+  (testing "subnet 32 - 1 addresses"
+    (is (true? (sc/ip-in-subnet? "192.168.25.0" "192.168.25.0" :32)))
+    (is (false? (sc/ip-in-subnet? "192.168.25.1" "192.168.25.0" :32))))
+  (testing "subnet 31 - 2 addresses"
+    (is (true? (sc/ip-in-subnet? "192.168.25.0" "192.168.25.0" :31)))
+    (is (true? (sc/ip-in-subnet? "192.168.25.1" "192.168.25.0" :31)))
+    (is (false? (sc/ip-in-subnet? "192.168.25.2" "192.168.25.0" :31))))
+  (testing "subnet 24- 256 addresses"
+    (is (true? (sc/ip-in-subnet? "192.168.25.0" "192.168.25.0" :24)))
+    (is (true? (sc/ip-in-subnet? "192.168.25.255" "192.168.25.0" :24))))
+  (testing "subnet 23 - 512 addresses"
+    (is (true? (sc/ip-in-subnet? "192.168.25.0" "192.168.25.0" :23)))
+    (is (true? (sc/ip-in-subnet? "192.168.25.255" "192.168.25.0" :23)))
+    (is (true? (sc/ip-in-subnet? "192.168.24.255" "192.168.25.0" :23)))
+    (is (true? (sc/ip-in-subnet? "192.168.24.255" "192.168.25.0" :23))))
+  (testing "subnet 22 - 1024 addresses"
+    (is (true? (sc/ip-in-subnet? "192.168.25.0" "192.168.25.0" :22)))
+    (is (true? (sc/ip-in-subnet? "192.168.25.255" "192.168.25.0" :22)))
+    (is (true? (sc/ip-in-subnet? "192.168.24.255" "192.168.25.0" :22)))
+    (is (true? (sc/ip-in-subnet? "192.168.24.255" "192.168.25.0" :22)))
+    (is (true? (sc/ip-in-subnet? "192.168.26.255" "192.168.25.0" :22)))
+    (is (true? (sc/ip-in-subnet? "192.168.26.255" "192.168.25.0" :22)))
+    (is (true? (sc/ip-in-subnet? "192.168.27.255" "192.168.25.0" :22)))
+    (is (true? (sc/ip-in-subnet? "192.168.27.255" "192.168.25.0" :22)))
+    (is (false? (sc/ip-in-subnet? "192.168.28.0" "192.168.25.0" :22)))))
