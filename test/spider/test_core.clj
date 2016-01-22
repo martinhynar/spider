@@ -16,7 +16,7 @@
 (deftest about-ip-to-long
   (testing "Valid IP addreses"
     (is (= (sc/ip-to-long "0.0.0.0") (long 0)))
-    (is (= (sc/ip-to-long "0.0.0.") (long 0)))
+    ;(is (= (sc/ip-to-long "0.0.0.") (long 0)))
     (is (= (sc/ip-to-long "0.0.0") (long 0)))
     (is (= (sc/ip-to-long "192.168.25.30") (long 3232241950)))
     (is (= (sc/ip-to-long "255.255.255.255") (long 4294967295))))
