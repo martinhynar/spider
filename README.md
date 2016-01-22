@@ -8,5 +8,14 @@ Collection of functions for network related calculations.
 #### Latest version
 [![Clojars Project](http://clojars.org/spider/latest-version.svg)](http://clojars.org/spider)
 
+#### Usage guide
+
+__Checking that address is within given range__
+
+```
+(spider.core/ip-in-range? "192.168.10.20" "192.168.10.0" "192.168.10.255")
+;; true
+```
+
 ## License
 Distributed under the Eclipse Public License, the same as Clojure. Please see the [LICENSE](LICENSE) file.
