@@ -1,5 +1,5 @@
 (defproject
-  spider "0.1.0-SNAPSHOT"
+  spider "0.1.0"
 
   :description "Collection of functions for network related calculations."
 
@@ -13,6 +13,8 @@
 
   :dependencies [[org.clojure/clojure "1.8.0"]]
 
+  :global-vars {*warn-on-reflection* true
+                *assert* false}
 
   :repl-options {:init-ns spider.core
                  :port    40001})
